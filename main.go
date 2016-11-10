@@ -30,5 +30,9 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(item)
+	if ddgf.NoNewLine {
+		fmt.Print(item)
+	} else {
+		fmt.Println(item)
+	}
 }

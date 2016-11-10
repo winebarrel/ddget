@@ -44,7 +44,7 @@ zoo
 
 ```sh
 wget https://github.com/winebarrel/ddget/releases/download/vX.X.X/ddget-vX.X.X-linux-amd64.gz
-gunzip -c ddget-v0.1.0-linux-amd64.gz > ddget
+gunzip -c ddget-vX.X.X-linux-amd64.gz > ddget
 chmod +x ddget
 ```
 

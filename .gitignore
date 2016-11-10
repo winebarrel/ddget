@@ -1,0 +1,8 @@
+/ddget
+*.gz
+/debian/ddget.debhelper.log
+/debian/ddget.substvars
+/debian/ddget/
+/debian/files
+/pkg/ddget*
+.DS_Store

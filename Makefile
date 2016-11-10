@@ -6,6 +6,9 @@ RUNTIME_GOPATH=$(GOPATH):$(shell pwd)
 SRC=$(wildcard *.go) $(wildcard src/*/*.go) $(wildcard src/*/*/*.go)
 TEST_SRC=$(wildcard src/ddget/*_test.go)
 
+UBUNTU_IMAGE=docker-go-pkg-build-ubuntu-trusty
+UBUNTU_CONTAINER_NAME=docker-go-pkg-build-ubuntu-trusty-$(shell date +%s)
+
 all: ddget
 
 ddget: go-get $(SRC)
@@ -34,3 +37,13 @@ clean:
 	rm -f debian/ddget.substvars
 	rm -f debian/files
 	rm -rf debian/ddget/
+
+package: clean ddget test
+	gzip -c ddget > ddget-$(VERSION)-$(GOOS)-$(GOARCH).gz
+
+package\:linux:
+	docker run --name $(UBUNTU_CONTAINER_NAME) -v $(shell pwd):/tmp/src $(UBUNTU_IMAGE) make -C /tmp/src package
+	docker rm $(UBUNTU_CONTAINER_NAME)
+
+docker\:build\:ubuntu-trusty:
+	docker build -f docker/Dockerfile.ubuntu-trusty -t $(UBUNTU_IMAGE) .

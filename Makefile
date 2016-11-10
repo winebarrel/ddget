@@ -17,11 +17,15 @@ endif
 go-get:
 	go get github.com/aws/aws-sdk-go
 	go get github.com/golang/mock/gomock
-
-mock:
 	go get github.com/golang/mock/mockgen
+	go get github.com/stretchr/testify
+
+test: go-get $(TEST_SRC)
+	GOPATH=$(RUNTIME_GOPATH) go test -v $(TEST_SRC)
+
+mock: go-get
 	mkdir -p src/mockaws
-	mockgen -source $(GOPATH)/src/github.com/aws/aws-sdk-go/service/ssm/ssmiface/interface.go -destination src/mockaws/ssmmock.go -package mockaws
+	mockgen -source $(GOPATH)/src/github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface/interface.go -destination src/mockaws/dynamodbmock.go -package mockaws
 
 clean:
 	rm -f ddget *.gz

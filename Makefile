@@ -39,7 +39,7 @@ clean:
 	rm -rf debian/ddget/
 
 package: clean ddget test
-	gzip -c ddget > ddget-$(VERSION)-$(GOOS)-$(GOARCH).gz
+	gzip -c ddget > pkg/ddget-$(VERSION)-$(GOOS)-$(GOARCH).gz
 
 package\:linux:
 	docker run --name $(UBUNTU_CONTAINER_NAME) -v $(shell pwd):/tmp/src $(UBUNTU_IMAGE) make -C /tmp/src package

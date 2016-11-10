@@ -1,4 +1,4 @@
-# runss
+# ddget
 
 Get DynamoDB Item.
 

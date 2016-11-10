@@ -2,6 +2,8 @@
 
 Get DynamoDB Item.
 
+[![Build Status](https://travis-ci.org/winebarrel/ddget.svg?branch=master)](https://travis-ci.org/winebarrel/ddget)
+
 ## Usage
 
 ```

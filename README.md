@@ -11,6 +11,10 @@ Usage of ddget:
   -k string
       Item key
   -n  Do not print newline
+  -p string
+      Profile name
+  -r string
+      Region
   -t string
       Table name
   -v string

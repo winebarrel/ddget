@@ -3,6 +3,7 @@ package ddget
 import (
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
@@ -12,10 +13,25 @@ type Ddget struct {
 	Ddb dynamodbiface.DynamoDBAPI
 }
 
-func New() (ddget *Ddget) {
-	return &Ddget{
-		Ddb: dynamodb.New(session.New()),
+func New(profile string, region string) (ddg *Ddget) {
+	sess := session.New()
+
+	config := &aws.Config{}
+
+	if profile != "" {
+		cred := credentials.NewSharedCredentials("", profile)
+		config.Credentials = cred
 	}
+
+	if region != "" {
+		config.Region = aws.String(region)
+	}
+
+	ddg = &Ddget{
+		Ddb: dynamodb.New(sess, config),
+	}
+
+	return
 }
 
 func (ddg *Ddget) getKeyAttrName(table string) (keyAttrName string, err error) {

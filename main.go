@@ -23,7 +23,7 @@ func main() {
 		panic(err)
 	}
 
-	ddg := ddget.New()
+	ddg := ddget.New(ddgf.Profile, ddgf.Region)
 	item, err := ddg.GetItem(ddgf.Table, ddgf.ValueAttrNmae, ddgf.Key)
 
 	if err != nil {
